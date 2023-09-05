@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "noImplicitAny": true,
+      "moduleResolution": "node",
+      "module": "ES6",  //esnext
+      "target": "ES5",  //es2017
+      "jsx": "react",
+      "allowJs": true,
+      "sourceMap": true
+    }
+}

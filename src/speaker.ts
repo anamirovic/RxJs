@@ -8,8 +8,15 @@ export class Speaker {
   }
   playSound(sound: string): void {
     console.log(`Playing sound: ${sound}`);
+
+    // if (instrument instanceof Guitar) {
+    //   instrument.animateGuitar();
+    // } else if (instrument instanceof Piano) {
+    //   instrument.animatePiano();
+    // }
     
-    this.piano.animatePiano();
-    this.guitar.animateGuitar();
-  }
+    // this.piano.animatePiano();
+    // this.guitar.animateGuitar();
+  
+ }
 }

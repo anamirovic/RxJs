@@ -1,21 +1,55 @@
-import { Subject, merge, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 export class Mixer {
-    private mixerSubject: Subject<string>;
-  
-            constructor() {
-            this.mixerSubject = new Subject<string>();
-            }
+  private mixerSubject: Subject<string>;
+  private soundSpeaker$: Observable<string>; // Observable za slanje zvuka zvučniku
 
-            // Dodajte funkciju za slanje zvuka u miksetu
-        sendSound(sound: string): void {
-            this.mixerSubject.next(sound);
-        }
+  constructor(instruments: any[]) {
+    this.mixerSubject = new Subject<string>();
 
-        // Pretvorite miksetu u Observable za pretplatu
-        get sound$(): Observable<string> {
-            return this.mixerSubject.asObservable();
-        }
-    
+    // Pretplata na sve instrumente
+    instruments.forEach(instrument => {
+      instrument.sound$.subscribe((sound:string) => {
+        this.decodeAndSendSound(sound);
+      });
+    });
 
+    // Pretplata na Observable za slanje zvuka zvučniku
+    this.soundSpeaker$ = this.mixerSubject.asObservable();
   }
+
+   // Sada možete dodati svojstvo sound$
+   get sound$(): Observable<string> {
+    return this.soundSpeaker$;
+  }
+
+//   // Funkcija za slanje zvuka zvučniku
+//   sendSoundToSpeaker(): Observable<string> {
+//     return this.soundSpeaker$;
+//   }
+
+  decodeAndSendSound(sound: string): void {
+    const instrumentId = sound.charAt(0); // Prvi karakter je identifikator instrumenta
+    const note = sound.slice(1); // Ostatak stringa je nota
+
+    // Dodajte logiku za dekodiranje zvuka na osnovu identifikatora i note
+    let decodedSound = "";
+
+    switch (instrumentId) {
+      case "0":
+        // Dekodiranje za guitar
+        decodedSound = `Guitar plays ${note}`;
+        break;
+      case "1":
+        // Dekodiranje za piano
+        decodedSound = `Piano plays ${note}`;
+        break;
+      // Dodajte druge instrumente po potrebi
+      default:
+        decodedSound = `Unknown instrument plays ${note}`;
+    }
+
+    // Slanje dekodiranog zvuka zvučniku
+    this.mixerSubject.next(decodedSound);
+  }
+}

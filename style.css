@@ -1,0 +1,11 @@
+.instrument {
+    position: absolute;
+}
+
+.main-frame {
+    position: relative;
+}
+
+/* #guitar {
+    filter: brightness(150%);
+} */

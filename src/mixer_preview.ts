@@ -1,3 +1,5 @@
+import { Speaker } from './speaker';
+
 export class MixerPreview{
     constructor(){
         this.draw();
@@ -13,6 +15,8 @@ export class MixerPreview{
             <img id="guitar" class="instrument" src="src/assets/guitar.png" />
             <img id="mixer" class="instrument" src="src/assets/mixer.png" />
             <img id="speaker" class="instrument" src="src/assets/speaker.png" />
+            <img id="drums" class="instrument" src="src/assets/drums.png" />
+            <img id="microphone" class="instrument" src="src/assets/microphone.png" />
         `;
     
         let speaker_info_frame = document.createElement("div");
@@ -21,6 +25,10 @@ export class MixerPreview{
         speaker_info_frame.innerHTML = `
             <p>Speaker: <span id="speaker-info"></span></p>
         `;
+
+        
     }
+
+  
 
 }

@@ -4,6 +4,8 @@ import { Guitar } from './guitar';
 import { Speaker } from './speaker';
 import { MixerPreview } from "./mixer_preview";
 import { Mixer } from './mixer';
+import { Drums } from './drums';
+import { Microphone } from './microphone';
 
 export const SAMPLE_RATE=5000;
 
@@ -11,15 +13,17 @@ export const SAMPLE_RATE=5000;
 
 const piano = new Piano('Steinway & Sons');
 const guitar = new Guitar('Blatobran');
+const drums= new Drums('bubnjevi');
+const microphone= new Microphone('mikorfon');
 
-const mixer = new Mixer([piano, guitar]);
+const mixer = new Mixer([piano, guitar, drums, microphone]);
 const mixer_Preview: MixerPreview = new MixerPreview();
 
-const speaker = new Speaker(piano, guitar);
+const speaker = new Speaker(piano, guitar, drums, microphone);
 
 
 // Spajanje svih instrumenata u miksetu
-const mergedSound$ = merge(piano.sound$, guitar.sound$);
+const mergedSound$ = merge(piano.sound$, guitar.sound$, drums.sound$, microphone.sound$);
 
 // // Slanje zvuka u miksetu
 // mergedSound$.subscribe(sound => {

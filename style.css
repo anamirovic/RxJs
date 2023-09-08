@@ -1,11 +1,33 @@
 .instrument {
-    position: absolute;
-}
+        position: absolute;
+        max-width: 100%; 
+        max-height: 100vh; 
+        height: auto; 
+ }
+
 
 .main-frame {
     position: relative;
 }
 
-/* #guitar {
-    filter: brightness(150%);
-} */
+
+/* Stil za okvir sa informacijama o zvučniku */
+.speaker-info-frame {
+    position: absolute; /* Postavljamo apsolutno pozicioniranje */
+    top: 20px; /* Podešavanje gornje margine prema potrebi */
+    left: 20px; /* Podešavanje leve margine prema potrebi */
+    background-color: rgba(255, 255, 255, 0.8); /* Boja pozadine sa providnošću */
+    padding: 10px; /* Podešavanje margina unutar okvira */
+    border: 2px solid #000; /* Debljina i boja okvira */
+    border-radius: 5px; /* Zaobljeni uglovi okvira */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Senka oko okvira */
+  }
+  
+  /* Stil za tekst unutar okvira */
+  #speaker-info {
+    font-size: 16px; /* Veličina fonta za tekst */
+    font-weight: bold; /* Podebljan tekst */
+    margin: 0; /* Uklanjamo margine oko teksta */
+  }
+  
+  

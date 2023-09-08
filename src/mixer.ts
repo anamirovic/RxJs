@@ -44,6 +44,14 @@ export class Mixer {
         // Dekodiranje za piano
         decodedSound = `Piano plays ${note}`;
         break;
+        case "2":
+        // Dekodiranje za drums
+        decodedSound = `Drums plays ${note}`;
+        break;
+        case "3":
+          // Dekodiranje za mikrofon
+          decodedSound = `Microphone vocal: ${note}`;
+          break;
       // Dodajte druge instrumente po potrebi
       default:
         decodedSound = `Unknown instrument plays ${note}`;

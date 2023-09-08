@@ -1,4 +1,4 @@
-import { Observable, interval, map } from 'rxjs';
+import { Observable, interval, map, delay,take } from 'rxjs';
 import { SAMPLE_RATE } from './index';
 
 export class Guitar {
@@ -11,7 +11,9 @@ export class Guitar {
     this._name = name;
     this.guitarIcon = document.getElementById("guitar");
     this.sound$ = interval(SAMPLE_RATE).pipe(
-      map(() => `${this.instrumentId}${this.generateRandomNote()}`)
+      map(() => `${this.instrumentId}${this.generateRandomNote()}`),
+      delay(Math.random() * 400),
+      take(5)
     );
   }
 
@@ -21,10 +23,10 @@ export class Guitar {
     return notes[randomIndex];
   }
 
-   public animateGuitar() {
-        this.guitarIcon.style.filter = "brightness(200%)";
-        setTimeout(() => {
-            this.guitarIcon.style.filter = "brightness(100%)";
-        }, 500);
-    }
+  //  public animateGuitar() {
+  //       this.guitarIcon.style.filter = "brightness(200%)";
+  //       setTimeout(() => {
+  //           this.guitarIcon.style.filter = "brightness(100%)";
+  //       }, 500);
+  //   }
 }

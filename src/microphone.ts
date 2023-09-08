@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 export class Microphone {
   private _name: string;
@@ -15,7 +15,8 @@ export class Microphone {
     const intervalId = setInterval(() => {
       const randomVocal = Math.random() > 0.5 ? 'Ahh' : 'Ooh';
       // Slanje identifikatora 3 uz generisane vokale
-      observer.next(`3${randomVocal}`);
+      observer.next(`3${randomVocal}`)
+      
     }, 3000); // Generiše zvuk svakih 3 sekunde
 
     

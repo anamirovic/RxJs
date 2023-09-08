@@ -1,4 +1,4 @@
-import { Observable, interval, map } from "rxjs";
+import { Observable, interval, map, delay,take } from "rxjs";
 import { SAMPLE_RATE } from "./index";
 
 export class Piano{
@@ -11,7 +11,9 @@ export class Piano{
         this._name=name;
         this.pianoIcon = document.getElementById("piano");
         this.sound$=interval(SAMPLE_RATE).pipe(
-            map(()=> `${this.instrumentId}${this.generateRandomNote()}`)
+            map(()=> `${this.instrumentId}${this.generateRandomNote()}`),
+            delay(Math.random() * 300),
+            take(5)
         );
 
     }
@@ -22,11 +24,11 @@ export class Piano{
         return notes[randomIndex];
       }
     
-    public animatePiano() {
-        this.pianoIcon.style.filter = "brightness(200%)";
-        setTimeout(() => {
-            this.pianoIcon.style.filter = "brightness(100%)";
-        }, 500);
-    }
+    // public animatePiano() {
+    //     this.pianoIcon.style.filter = "brightness(200%)";
+    //     setTimeout(() => {
+    //         this.pianoIcon.style.filter = "brightness(100%)";
+    //     }, 500);
+    // }
    
 }

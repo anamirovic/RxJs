@@ -1,4 +1,4 @@
-import { Observable, interval, map } from 'rxjs';
+import { Observable, interval, map, delay,take } from 'rxjs';
 import { SAMPLE_RATE } from './index';
 
 export class Drums {
@@ -11,7 +11,9 @@ export class Drums {
     this._name = name;
     this.drumsIcon = document.getElementById("drums");
     this.sound$ = interval(SAMPLE_RATE).pipe(
-      map(() => `${this.instrumentId}kick`)
+      map(() => `${this.instrumentId}kick`),
+      delay(Math.random() * 500),
+      take(5)
     );
   }
 }

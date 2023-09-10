@@ -11,10 +11,10 @@ export const SAMPLE_RATE=5000;
 
 
 
-const piano = new Piano('Steinway & Sons');
-const guitar = new Guitar('Blatobran');
-const drums= new Drums('bubnjevi');
-const microphone= new Microphone('mikorfon');
+const piano = new Piano('Klavir');
+const guitar = new Guitar('Gitara');
+const drums= new Drums('Bubnjevi');
+const microphone= new Microphone('Mikorfon');
 
 const mixer = new Mixer([piano, guitar, drums, microphone]);
 const mixer_Preview: MixerPreview = new MixerPreview();

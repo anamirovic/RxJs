@@ -16,4 +16,11 @@ export class Drums {
       take(5)
     );
   }
+
+//   public animateDrums() {
+//     this.drumsIcon.style.filter = "brightness(200%)";
+//     setTimeout(() => {
+//         this.drumsIcon.style.filter = "brightness(100%)";
+//     }, 500);
+// }
 }

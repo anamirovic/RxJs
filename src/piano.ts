@@ -23,8 +23,8 @@ export class Piano{
         const randomIndex = Math.floor(Math.random() * notes.length);
         return notes[randomIndex];
       }
-    
-    // public animatePiano() {
+
+    //   public animatePiano() {
     //     this.pianoIcon.style.filter = "brightness(200%)";
     //     setTimeout(() => {
     //         this.pianoIcon.style.filter = "brightness(100%)";

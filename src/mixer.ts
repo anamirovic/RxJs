@@ -1,4 +1,4 @@
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 
 
 export class Mixer {
@@ -6,6 +6,7 @@ export class Mixer {
   private soundSpeaker$: Observable<string>; // Observable za slanje zvuka zvučniku
 
   private currentSound: string = "";
+ 
 
   constructor(instruments: any[]) {
     this.mixerSubject = new Subject<string>();
@@ -13,6 +14,7 @@ export class Mixer {
     // Pretplata na sve instrumente
     instruments.forEach(instrument => {
       instrument.sound$.subscribe((sound:string) => {
+        
         this.decodeAndSendSound(sound);
 
        
@@ -23,16 +25,11 @@ export class Mixer {
     this.soundSpeaker$ = this.mixerSubject.asObservable();
   }
 
+
    // Sada možete dodati svojstvo sound$
    get sound$(): Observable<string> {
     return this.soundSpeaker$;
   }
-
-
-//   // Funkcija za slanje zvuka zvučniku
-//   sendSoundToSpeaker(): Observable<string> {
-//     return this.soundSpeaker$;
-//   }
 
   decodeAndSendSound(sound: string): void {
     const instrumentId = sound.charAt(0); // Prvi karakter je identifikator instrumenta

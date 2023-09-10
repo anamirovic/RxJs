@@ -23,4 +23,11 @@ export class Microphone {
       return () => clearInterval(intervalId); // Čisti interval prilikom odjave
     });
   }
+
+//   public animateMicrophone() {
+//     this.microphoneIcon.style.filter = "brightness(200%)";
+//     setTimeout(() => {
+//         this.microphoneIcon.style.filter = "brightness(100%)";
+//     }, 500);
+// }
 }

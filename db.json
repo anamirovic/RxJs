@@ -1,0 +1,25 @@
+{
+    "sounds": [
+      {
+        "id": 0,
+        "name": "Guitar",
+        "soundPath": "guitar.wav"
+      },
+      {
+        "id": 1,
+        "name": "Piano",
+        "soundPath": "piano.wav"
+      },
+      {
+        "id": 2,
+        "name": "Drums",
+        "soundPath": "drums.wav"
+      },
+      {
+        "id": 3,
+        "name": "Microphone",
+        "soundPath": "microphone.wav"
+      }
+    ]
+  }
+  

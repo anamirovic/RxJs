@@ -3,16 +3,14 @@ import { SAMPLE_RATE } from './index';
 
 export class Guitar {
   private _name: string;
-  private guitarIcon: HTMLElement;
   private instrumentId: number = 0;
   sound$: Observable<string>;
 
   constructor(name: string) {
     this._name = name;
-    this.guitarIcon = document.getElementById("guitar");
     this.sound$ = interval(SAMPLE_RATE).pipe(
       map(() => `${this.instrumentId}${this.generateRandomNote()}`),
-      delay(Math.random() * 400),
+      delay(3000),
       take(5)
     );
   }
@@ -23,10 +21,4 @@ export class Guitar {
     return notes[randomIndex];
   }
 
-  //  public animateGuitar() {
-  //       this.guitarIcon.style.filter = "brightness(200%)";
-  //       setTimeout(() => {
-  //           this.guitarIcon.style.filter = "brightness(100%)";
-  //       }, 500);
-  //   }
 }

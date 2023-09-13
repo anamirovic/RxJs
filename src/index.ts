@@ -1,4 +1,4 @@
-import { Subject, interval, merge, Subscription, Observable } from "rxjs";
+import { Subject, interval, merge, Subscription, Observable, take } from "rxjs";
 import { Piano } from "./piano";
 import { Guitar } from './guitar';
 import { Speaker } from './speaker';
@@ -19,19 +19,21 @@ const microphone= new Microphone('Mikorfon');
 const mixer = new Mixer([piano, guitar, drums, microphone]);
 const mixer_Preview: MixerPreview = new MixerPreview();
 
-const speaker = new Speaker(piano, guitar, drums, microphone);
+
+const speaker = new Speaker();
 
 
-// Spajanje svih instrumenata u miksetu
-const mergedSound$ = merge(piano.sound$, guitar.sound$, drums.sound$, microphone.sound$);
 
-// // Slanje zvuka u miksetu
-// mergedSound$.subscribe(sound => {
-//     mixer.sendSound(sound);
-//   });
 
-  // Pretplata na miksetu i reprodukcija zvuka
+  //Pretplata na miksetu i reprodukcija zvuka
 mixer.sound$.subscribe(sound => {
     speaker.playSound(sound);
   });
+
+
+  
+
+
+
+  
 

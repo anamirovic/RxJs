@@ -1,4 +1,4 @@
-import { Observable, interval, Subscription,from, merge, filter, startWith, map, catchError, switchMap } from 'rxjs';
+import { Observable, interval, Subscription,from, merge, filter, map, catchError, switchMap, zip } from 'rxjs';
 import { Guitar } from './guitar';
 import { Piano } from './piano';
 import { Drums } from './drums';
@@ -15,6 +15,7 @@ export class Speaker {
   private microphoneIcon: HTMLElement;
   private speakerInfoElement: HTMLElement | null;
   private currentAudio: HTMLAudioElement | null = null;
+
  
 
   constructor(){
@@ -25,17 +26,6 @@ export class Speaker {
     this.drumsIcon = document.getElementById("drums");
     this.microphoneIcon = document.getElementById("microphone");
     this.fetchData();
-    
-    // // Kreiranje observable-a za preuzimanje zvukova
-    // this.sounds$ = from(this.fetchSoundsFromServer()).pipe(
-    //   catchError((error) => {
-    //     console.error('Error fetching sounds:', error);
-    //     return [];
-    //   }),
-    //   startWith([]) // Počnite sa praznim nizom kako biste izbegli grešku ako fetch ne uspe
-    // );
-
-    
   }
 
  // Define a function to create an audio element for each sound
@@ -44,8 +34,6 @@ export class Speaker {
   audio.preload = "auto";
   return audio;
 }
-
-
 
 // Create a function to play a sound by ID
 public playSoundById(id: number) {
@@ -79,8 +67,7 @@ public fetchData() {
     .catch((error) => {
       console.error("Error fetching data from the server:", error);
     });
-    console.log(audioElements);
-    
+    console.log(audioElements);   
 }
 
   playSound(sound: string): void {
@@ -93,46 +80,21 @@ public fetchData() {
         instrumentName = 'Guitar';
         this.animateGuitar();
         this.playSoundById(0);
-       
-        // const audioGuitar = document.getElementById('guitarSound') as HTMLAudioElement;
-        // if(audioGuitar){
-        //   audioGuitar.currentTime=0;
-        //   audioGuitar.play();
-       // }
         break;
       case '1':
         instrumentName = 'Piano';
         this.animatePiano();
         this.playSoundById(1);
-       
-        
-        // const audioPiano = document.getElementById('pianoSound') as HTMLAudioElement;
-        // if(audioPiano){
-        //   audioPiano.currentTime=0;
-        //   audioPiano.play();
-       // }
         break;
       case '2':
         instrumentName = 'Drums';
         this.animateDrums();
         this.playSoundById(2);
-        
-        // const audioDrums = document.getElementById('drumsSound') as HTMLAudioElement;
-        // if(audioDrums){
-        //   audioDrums.currentTime=0;
-        //   audioDrums.play();
-        // }
         break;
       case '3':
         instrumentName = 'Microphone';
         this.animateMicrophone();
         this.playSoundById(3);
-       
-        // const audioMic = document.getElementById('microphoneSound') as HTMLAudioElement;
-        // if(audioMic){
-        //   audioMic.currentTime=0;
-        //   audioMic.play();
-        // }
         break;
       default:
         instrumentName = 'Unknown instrument';
@@ -182,6 +144,5 @@ public animateMicrophone() {
       this.microphoneIcon.style.filter = "brightness(100%)";
   }, 200);
 }
-  
 
 }

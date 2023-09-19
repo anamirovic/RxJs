@@ -1,4 +1,7 @@
+import { Mixer } from "./mixer";
+
 export class MixerPreview {
+ 
     //private instrumentIcons: { [key: string]: HTMLElement } = {};
   
     constructor() {
@@ -27,8 +30,11 @@ export class MixerPreview {
       speaker_info_frame.innerHTML = `
         <p><span id="speaker-info"></span></p>
       `;
+
+
+  
   
 
-}
+    }
 }
   

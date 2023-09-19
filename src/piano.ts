@@ -13,7 +13,6 @@ export class Piano{
             delay(1000),
             take(5)
         );
-
     }
 
     private generateRandomNote(): string {
@@ -21,6 +20,5 @@ export class Piano{
         const randomIndex = Math.floor(Math.random() * notes.length);
         return notes[randomIndex];
       }
-
 
 }

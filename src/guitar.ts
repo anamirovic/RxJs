@@ -10,7 +10,7 @@ export class Guitar {
     this._name = name;
     this.sound$ = interval(SAMPLE_RATE).pipe(
       map(() => `${this.instrumentId}${this.generateRandomNote()}`),
-      delay(3000),
+      delay(2000),
       take(5)
     );
   }

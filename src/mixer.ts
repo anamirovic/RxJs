@@ -1,10 +1,12 @@
-import { Subject, Observable, zip,take, interval} from 'rxjs';
+import { Subject, Observable,map,bufferCount, filter, combineLatest, zip, take, mergeMap, of} from 'rxjs';
 
 
 export class Mixer {
   private mixerSubject: Subject<string>;
-  private soundSpeaker$: Observable<string>; // Observable za slanje zvuka zvučniku
+  private soundSpeaker$: Observable<string>; 
   private instruments: Observable<string>[] = [];
+  public combinedSound$: Observable<string>;
+
   
 
 
@@ -18,58 +20,49 @@ export class Mixer {
       });
     });
 
-
     // Pretplata na Observable za slanje zvuka zvučniku
     this.soundSpeaker$ = this.mixerSubject.asObservable();
 
-  
+
+    this.combinedSound$ = this.soundSpeaker$.pipe(
+      bufferCount(4),
+      mergeMap(sounds => {
+        return zip(
+          ...sounds.map(sound => {
+            return of(sound).pipe( 
+              map((s: string) => s.slice(1))
+            );
+          })
+        ).pipe(
+          map(([piano, guitar, microphone, drums]) => {
+            const combinedNotes = `${piano}, ${guitar}, ${microphone}, ${drums}`;
+            return `Musical passage: ${combinedNotes}`;
+          })
+        );
+      })
+    );
   }
 
-   // Sada možete dodati svojstvo sound$
+  get combinedSound(): Observable<string> {
+    return this.combinedSound$;
+  }
+
    get sound$(): Observable<string> {
     return this.soundSpeaker$;
+   }
 
-  
+   private  getInstrumentName(instrumentId: string): string {
+      switch (instrumentId) {
+        case '0':
+          return 'Guitar';
+        case '1':
+          return 'Piano';
+        case '2':
+          return 'Drums';
+        case '3':
+          return 'Microphone';
+        default:
+          return 'Unknown';
+      }
   }
- 
 }
-  
-
-  
-  // sendSound(sound: string): void {
-  //   this.mixerSubject.next(sound);
-  // }
-
-  // decodeAndSendSound(sound: string): void {
-  //   const instrumentId = sound.charAt(0); // Prvi karakter je identifikator instrumenta
-  //   const note = sound.slice(1); // Ostatak stringa je nota
-
-  //   // Dodajte logiku za dekodiranje zvuka na osnovu identifikatora i note
-  //   let decodedSound = "";
-
-  //   switch (instrumentId) {
-  //     case "0":
-  //       // Dekodiranje za guitar
-  //       decodedSound = `Guitar plays ${note}`;
-  //       break;
-  //     case "1":
-  //       // Dekodiranje za piano
-  //       decodedSound = `Piano plays ${note}`;
-  //       break;
-  //       case "2":
-  //       // Dekodiranje za drums
-  //       decodedSound = `Drums plays ${note}`;
-  //       break;
-  //       case "3":
-  //         // Dekodiranje za mikrofon
-  //         decodedSound = `Microphone vocal: ${note}`;
-  //         break;
-  //     // Dodajte druge instrumente po potrebi
-  //     default:
-  //       decodedSound = `Unknown instrument plays ${note}`;
-  //   }
-
-  //   // Slanje dekodiranog zvuka zvučniku
-  //   this.mixerSubject.next(decodedSound);
-  // }
-

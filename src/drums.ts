@@ -10,7 +10,7 @@ export class Drums {
     this._name = name;
     this.sound$ = interval(SAMPLE_RATE).pipe(
       map(() => `${this.instrumentId}kick`),
-      delay(5000),
+      delay(4000),
       take(5)
     );
   }

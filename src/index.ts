@@ -9,8 +9,6 @@ import { Microphone } from './microphone';
 
 export const SAMPLE_RATE=5000;
 
-
-
 const piano = new Piano('Klavir');
 const guitar = new Guitar('Gitara');
 const drums= new Drums('Bubnjevi');
@@ -18,11 +16,7 @@ const microphone= new Microphone('Mikorfon');
 
 const mixer = new Mixer([piano, guitar, drums, microphone]);
 const mixer_Preview: MixerPreview = new MixerPreview();
-
-
 const speaker = new Speaker();
-
-
 
 
   //Pretplata na miksetu i reprodukcija zvuka
@@ -30,6 +24,10 @@ mixer.sound$.subscribe(sound => {
     speaker.playSound(sound);
   });
 
+
+  mixer.combinedSound$.subscribe(combinedSound => {
+    console.log(combinedSound);
+  });
 
   
 

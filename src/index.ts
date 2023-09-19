@@ -19,7 +19,6 @@ const mixer_Preview: MixerPreview = new MixerPreview();
 const speaker = new Speaker();
 
 
-  //Pretplata na miksetu i reprodukcija zvuka
 mixer.sound$.subscribe(sound => {
     speaker.playSound(sound);
   });

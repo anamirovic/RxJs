@@ -1,15 +1,11 @@
 import { Mixer } from "./mixer";
 
 export class MixerPreview {
- 
-    //private instrumentIcons: { [key: string]: HTMLElement } = {};
-  
     constructor() {
       this.draw();
     }
   
     draw() {
-      // Create the main frame and speaker info frame
       let main_frame = document.createElement("div");
       main_frame.classList.add("main-frame");
       document.body.appendChild(main_frame);
@@ -30,10 +26,6 @@ export class MixerPreview {
       speaker_info_frame.innerHTML = `
         <p><span id="speaker-info"></span></p>
       `;
-
-
-  
-  
 
     }
 }

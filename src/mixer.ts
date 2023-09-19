@@ -1,19 +1,15 @@
-import { Subject, Observable,map,bufferCount, filter, combineLatest, zip, take, mergeMap, of} from 'rxjs';
+import { Subject, Observable,map,bufferCount,zip, mergeMap, of} from 'rxjs';
 
 
 export class Mixer {
   private mixerSubject: Subject<string>;
   private soundSpeaker$: Observable<string>; 
-  private instruments: Observable<string>[] = [];
+  //private instruments: Observable<string>[] = [];
   public combinedSound$: Observable<string>;
-
-  
-
 
   constructor(instruments: any[]) {
     this.mixerSubject = new Subject<string>();
 
-    // Pretplata na sve instrumente
     instruments.forEach(instrument => {
       instrument.sound$.subscribe((sound: string) => {
         this.mixerSubject.next(sound);
@@ -50,19 +46,20 @@ export class Mixer {
    get sound$(): Observable<string> {
     return this.soundSpeaker$;
    }
-
-   private  getInstrumentName(instrumentId: string): string {
-      switch (instrumentId) {
-        case '0':
-          return 'Guitar';
-        case '1':
-          return 'Piano';
-        case '2':
-          return 'Drums';
-        case '3':
-          return 'Microphone';
-        default:
-          return 'Unknown';
-      }
   }
-}
+
+  //  private  getInstrumentName(instrumentId: string): string {
+  //     switch (instrumentId) {
+  //       case '0':
+  //         return 'Guitar';
+  //       case '1':
+  //         return 'Piano';
+  //       case '2':
+  //         return 'Drums';
+  //       case '3':
+  //         return 'Microphone';
+  //       default:
+  //         return 'Unknown';
+  //     }
+  //}
+

@@ -4,7 +4,7 @@ import { SAMPLE_RATE } from "./index";
 export class Microphone {
   private _name: string;
   private instrumentId: number = 3;
-    sound$: Observable<string>;
+  sound$: Observable<string>;
 
   constructor(name: string) {
     this._name = name;

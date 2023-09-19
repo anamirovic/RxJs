@@ -1,9 +1,3 @@
-import { Observable, interval, Subscription,from, merge, filter, map, catchError, switchMap, zip } from 'rxjs';
-import { Guitar } from './guitar';
-import { Piano } from './piano';
-import { Drums } from './drums';
-import { Microphone } from './microphone';
-
 // Create an array to store the audio elements for each sound
 const audioElements: { id: number; audio: HTMLAudioElement }[] = [];
 
@@ -40,7 +34,6 @@ public playSoundById(id: number) {
   const audio = audioElements.find((element) => element.id === id)?.audio;
   if (audio) {
     if (this.currentAudio) {
-      // Prekini reprodukciju prethodnog zvuka ako postoji
       this.currentAudio.pause();
       this.currentAudio.currentTime = 0;
     }
@@ -66,8 +59,7 @@ public fetchData() {
     })
     .catch((error) => {
       console.error("Error fetching data from the server:", error);
-    });
-    console.log(audioElements);   
+    });   
 }
 
   playSound(sound: string): void {
@@ -120,7 +112,7 @@ public fetchData() {
     setTimeout(() => {
         this.pianoIcon.style.filter = "brightness(100%)";
     }, 200);
-}
+  }
 
 public animateGuitar() {
   this.guitarIcon.style.filter = "brightness(200%)";
